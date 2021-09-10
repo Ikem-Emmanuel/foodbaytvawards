@@ -1,0 +1,81 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  ::ng-deep {
+    .imageContainer {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: rgba(34, 34, 34, 0.4);
+    }
+    .logoWrapper {
+      margin: 20px 30px 20px 0;
+    }
+    .formContainer {
+      display: flex;
+      width: 100%;
+      margin: auto;
+      .formFieldWrap {
+        width: 60%;
+        margin: auto;
+      }
+    }
+
+    .icon {
+      margin-left: 16px;
+      color: rgba(0, 0, 0, 0.2);
+      font-size: 24px;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: color 0.3s;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+    .other {
+      margin-top: 24px;
+      line-height: 22px;
+      text-align: left;
+      nz-tooltip {
+        vertical-align: middle;
+      }
+      .register {
+        float: right;
+      }
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .imageContainer {
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+      background-color: rgba(34, 34, 34, 0.4);
+    }
+    .formContainer {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      margin: auto;
+    }
+    .formFieldWrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  :host ::ng-deep {
+    .icon {
+      color: rgba(255, 255, 255, 0.2);
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

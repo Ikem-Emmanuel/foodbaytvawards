@@ -1,0 +1,77 @@
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="imageContainer">
+    <div class="logoWrapper">
+      <img class="logo" src="./assets/logo.png" />
+    </div>
+    <img width="80%" src="./assets/login-auth-bg.svg" alt="" srcset="" style="margin: auto" />
+  </div>
+  <div nz-col class="formContainer" nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+    <div class="formFieldWrap">
+      <div class="top">
+        <h1 class="">Welcome Back!</h1>
+        <p>
+          Don't have an account ?
+          <span
+            ><a class="login" routerLink="/auth/register">{{ 'Register' | translate }}</a></span
+          >
+        </p>
+      </div>
+      <div>
+        <div class="loginForm">
+          <div class="loginHeader" *ngIf="view === false"></div>
+          <p class="loginHeader" *ngIf="view === true">
+            {{ 'Reset Password' }}
+          </p>
+          <form nz-form [formGroup]="form" (ngSubmit)="login()" role="form" *ngIf="view == false">
+            <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" nzCloseable class="mb-lg"></nz-alert>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please Enter an email">
+                <nz-input-group nzSize="large" nzPrefixIcon="user">
+                  <input nz-input formControlName="mail" placeholder="username: example@example.com" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please Enter password">
+                <nz-input-group nzSize="large" nzPrefixIcon="lock">
+                  <input nz-input type="password" formControlName="password" placeholder="" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-col [nzSpan]="12">
+                <label nz-checkbox formControlName="remember">Remember me</label>
+              </nz-col>
+              <nz-col [nzSpan]="12" class="text-right">
+                <a class="forgot" (click)="forgotPassword()">Forgot your password?</a>
+              </nz-col>
+            </nz-form-item>
+            <nz-form-item>
+              <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="http.loading" nzBlock>Login</button>
+            </nz-form-item>
+          </form>
+
+          <form nz-form [formGroup]="form" (ngSubmit)="forgot()" role="form" *ngIf="view == true">
+            <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" nzCloseable class="mb-lg"></nz-alert>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please enter Email ">
+                <nz-input-group nzSize="large" nzPrefixIcon="user">
+                  <input class="ant-input" nz-input formControlName="mail" placeholder="mail" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="loading" [disabled]="loading" nzBlock>
+                Submit</button
+              ><br />
+              <div class="action_footer text-center">
+                <a class="login" (click)="forgotPassword()">{{ 'Login' }}</a>
+              </div>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="alain-default__content-title" style="margin-top: -26px">
+    <h1>
+        Users
+        <small>Create, edit and Delete a User</small>
+    </h1>
+</div>
+
+<nz-card [nzBordered]="false">
+    <div class="text-left">
+        <button nz-button (click)="addUser()" [nzType]="'primary'">
+      <i nz-icon nzType="plus"></i>
+      <span>Add</span>
+    </button>
+        <!-- <button nz-button (click)="editUser()" [nzType]="'secondary'">
+      <i nz-icon nzType="edit"></i>
+      <span>Edit</span>
+    </button> -->
+        <!-- <button nz-popconfirm nzPopconfirmTitle="Are you sure?" [nzIcon]="iconTpl" nzPopconfirmPlacement="bottom" (nzOnConfirm)="deleteUser()" (nzOnCancel)="handleModalCancel()" nz-button nzDanger>
+      <i nz-icon nzType="delete"></i>
+      <span>Delete</span>
+    </button> -->
+        <ng-template #iconTpl>
+            <i nz-icon nzType="question-circle-o" style="color: red"></i>
+        </ng-template>
+    </div>
+</nz-card>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleModalCancel()">
+    <ng-template #modalTitle>
+        {{ isAddorEdit == true ? 'Update User' : 'Add User' }}
+    </ng-template>
+
+    <ng-template #modalContent>
+        <nz-row>
+            <nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-row>
+                            <nz-col nzSpan="6">
+                                <nz-form-label nzFor="name"> Name</nz-form-label>
+                            </nz-col>
+                            <nz-col nzSpan="18">
+                                <input nz-input [(ngModel)]="q.name" name="name" placeholder="" id="name" />
+                            </nz-col>
+                        </nz-row>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-col>
+            <nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-row>
+                            <nz-col nzSpan="6">
+                                <nz-form-label nzFor="email"> Email</nz-form-label>
+                            </nz-col>
+                            <nz-col nzSpan="18">
+                                <input nz-input [(ngModel)]="q.email" name="email" placeholder="" id="email" />
+                            </nz-col>
+                        </nz-row>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-col>
+            <nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-row>
+                            <nz-col nzSpan="6">
+                                <nz-form-label nzFor="mobile"> Role</nz-form-label>
+                            </nz-col>
+                            <nz-col nzSpan="18">
+                                <nz-select nzShowSearch nzAllowClear [(ngModel)]="q.role" name="role" id="role">
+                                    <nz-option *ngFor="let i of roles" [nzLabel]="i.name" [nzValue]="i.id"></nz-option>
+                                </nz-select>
+                            </nz-col>
+                        </nz-row>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-col>
+            <nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-row>
+                            <nz-col nzSpan="6">
+                                <nz-form-label nzFor="mobile"> Is Active</nz-form-label>
+                            </nz-col>
+                            <nz-col nzSpan="18">
+                                <nz-select nzShowSearch nzAllowClear [(ngModel)]="q.status" name="status" id="status">
+                                    <nz-option *ngFor="let i of activationStatus" [nzLabel]="i.name" [nzValue]="i.value"></nz-option>
+                                </nz-select>
+                            </nz-col>
+                        </nz-row>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-col>
+        </nz-row>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleModalCancel()">Cancel</button>
+        <button nz-button nzType="primary" (click)="createUser()" [nzLoading]="loading" *ngIf="isAddorEdit == false">Add</button>
+        <button nz-button nzType="primary" (click)="updateUser()" [nzLoading]="loading" *ngIf="isAddorEdit == true">Update</button>
+    </ng-template>
+</nz-modal>
+<div class="container">
+    <nz-table #deviceTable [nzLoading]="loading" [nzLoadingDelay]="'1000'" [nzBordered]="true" [nzShowPagination]="true" [nzPageSize]="15" [nzData]="users">
+        <thead>
+            <tr>
+                <th [nzSelections]="userSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>User Type</th>
+                <th>Role</th>
+                <th>Is Active</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of deviceTable.data">
+                <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.type }}</td>
+                <td>{{ data.role?.name }}</td>
+                <td>
+                    <i nz-icon nzType="check-square" nzTheme="outline" *ngIf="data.status"></i>
+                    <i nz-icon nzType="border" nzTheme="outline" *ngIf="!data.status"></i>
+                </td>
+                <td>{{ data.created_at | date: 'medium' }}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

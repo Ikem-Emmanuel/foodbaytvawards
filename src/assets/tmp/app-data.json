@@ -1,0 +1,28 @@
+{
+  "app": {
+    "name": "Botoseal Dashboard",
+    "description": "An Anti-Counterfeiting Solution for Products and Documents"
+  },
+  "menu": [
+    {
+      "text": "Dashboard",
+      "i18n": "menu.main",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Dashboard",
+          "i18n": "menu.dashboard",
+          "icon": "anticon-dashboard",
+          "children": [
+            {
+              "text": "Dashboard",
+              "link": "/dashboard/v1",
+              "i18n": "menu.dashboard.v1"
+            }
+          ]
+        }
+      ]
+    },
+  ]
+}

@@ -1,0 +1,51 @@
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="imageContainer">
+    <div class="logoWrapper">
+      <img class="logo" src="./assets/logo.png" />
+    </div>
+    <img width="80%" src="./assets/login-auth-bg.svg" alt="" srcset="" style="margin: auto" />
+  </div>
+  <div nz-col class="formContainer" nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+    <div class="formFieldWrap">
+      <div class="top">
+        <h1 class="">Welcome Back!</h1>
+        <p>
+          Already Activated your account ?
+          <span
+            ><a class="login" routerLink="/login">{{ 'Login' }}</a></span
+          >
+        </p>
+      </div>
+      <div>
+        <div class="loginForm">
+          <p class="loginHeader">
+            {{ 'Activate Your Account' }}
+          </p>
+
+          <form nz-form [formGroup]="form" (ngSubmit)="activate()" role="form">
+            <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please enter Password ">
+                <nz-input-group nzSize="large" nzPrefixIcon="lock">
+                  <input nz-input type="password" formControlName="password" placeholder=" Password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please enter Password to Confirm">
+                <nz-input-group nzSize="large" nzPrefixIcon="lock">
+                  <input nz-input type="password" formControlName="confirm" placeholder="Confirm Password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="http.loading" [disabled]="http.loading" nzBlock>
+                Submit
+              </button>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

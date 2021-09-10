@@ -1,0 +1,88 @@
+{
+  "app": {
+    "name": "Angostura Dashboard",
+    "description": "An Anti-Counterfeiting Solution for Products and Documents"
+  },
+  "menu": [
+    {
+      "text": "Dashboard",
+      "i18n": "menu.main",
+      "group": true,
+      "hideInBreadcrumb": false,
+      "children": [
+        {
+          "text": "Dashboard",
+          "i18n": "menu.dashboard",
+          "icon": "anticon-dashboard"
+        }
+      ]
+    },
+    {
+      "text": "Operations",
+      "i18n": "menu.operations",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Operations",
+          "i18n": "menu.operations",
+          "icon": "anticon-group",
+          "children": [
+            {
+              "text": "Batch",
+              "link": "/inventory/lot",
+              "icon": "anticon-container",
+              "i18n": "menu.lot"
+            },
+            {
+              "text": "Batch",
+              "link": "/inventory/batch",
+              "icon": "anticon-hdd",
+              "i18n": "menu.batch"
+            },
+            {
+              "text": "Product",
+              "link": "/inventory/product",
+              "icon": "anticon-inbox",
+              "i18n": "menu.product"
+            },
+            {
+              "text": "Promotion",
+              "link": "/inventory/promo",
+              "icon": "anticon-notification",
+              "i18n": "menu.promo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "User",
+      "i18n": "menu.user.index",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "User",
+          "i18n": "menu.user.index",
+          "icon": "anticon-user",
+          "link": "/users"
+        }
+      ]
+    },
+    {
+      "text": "Account",
+      "i18n": "menu.account.index",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Profile",
+          "i18n": "menu.account.profile",
+          "icon": "anticon-user",
+          "link": "/account"
+        }
+      ]
+    }
+  ]
+}
