@@ -1,0 +1,40 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  margin: 0 auto;
+  ::ng-deep {
+    .judges-wrapper {
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      margin: 48px 0px;
+      .judges-header-wrapper {
+        width: 40%;
+        text-align: center;
+        margin: auto;
+        .judges-header-text {
+          font-size: 40px;
+          margin-bottom: 0px;
+        }
+        .judges-header-text-glow {
+          color: #e1ba59;
+        }
+        .judges-sub-text {
+          color: #340a0d;
+          line-height: 18px;
+          letter-spacing: 0.01em;
+        }
+      }
+      .judges-content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 48px 0px;
+      }
+    }
+    @media only screen and (max-width: 600px) {
+    }
+  }
+}

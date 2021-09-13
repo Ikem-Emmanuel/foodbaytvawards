@@ -1,0 +1,15 @@
+<div class="guidelines-wrapper">
+  <div class="guidelines-header-wrapper">
+    <h2 class="guidelines-header-text">GUIDE<span class="guidelines-header-text-glow">LINES</span></h2>
+    <p class="guidelines-sub-text">consectetur adipiscing elit. Phasellus maximus consectetur imperdiet. Phasellus ac quam elit</p>
+  </div>
+  <div class="guidelines-content-wrapper">
+    <nz-tabset class="guidelines-content-container" nzTabPosition="left">
+      <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.title"
+        ><div class="guidelines-tabs-container">
+          <p style="" [innerHTML]="tab.description"></p>
+          <img class="guidelines-content-image" src="{{ tab.image }}" alt="" /></div
+      ></nz-tab>
+    </nz-tabset>
+  </div>
+</div>

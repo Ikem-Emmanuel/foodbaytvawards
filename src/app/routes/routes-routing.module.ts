@@ -11,6 +11,10 @@ import { UsersModule } from './user/users.module';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: '',
     component: LayoutBasicComponent,
     canActivate: [SimpleGuard],
     children: [

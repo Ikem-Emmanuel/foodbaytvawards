@@ -1,0 +1,46 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  margin: 0 auto;
+  ::ng-deep {
+    .contact-wrapper {
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      margin: 48px 0px;
+      padding: 30px;
+      .contact-header-wrapper {
+        width: 40%;
+        text-align: center;
+        margin: auto;
+        .contact-header-text {
+          font-size: 40px;
+          margin-bottom: 0px;
+        }
+        .contact-header-text-glow {
+          color: #e1ba59;
+        }
+        .contact-sub-text {
+          color: #340a0d;
+          line-height: 18px;
+          letter-spacing: 0.01em;
+          .contact-phone-text-glow {
+            font-size: 15px;
+            font-weight: 500;
+            font-style: italic;
+            color: #090202;
+          }
+        }
+      }
+      .contact-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    @media only screen and (max-width: 600px) {
+    }
+  }
+}

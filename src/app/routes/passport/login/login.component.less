@@ -13,13 +13,20 @@
     .logoWrapper {
       margin: 20px 30px 20px 0;
     }
-    .formContainer {
-      display: flex;
-      width: 100%;
+    .login-card {
+      border-radius: 0.25rem;
+      background-color: #fff;
+      padding: 36px;
       margin: auto;
-      .formFieldWrap {
-        width: 60%;
-        margin: auto;
+      word-wrap: break-word;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      .login-card-header {
+        text-align: center;
+        margin: 20px 0px;
+        .login-card-header-text {
+          font-size: 20px;
+          font-weight: 500;
+        }
       }
     }
 
@@ -46,12 +53,25 @@
       }
     }
   }
+  .ant-input-affix-wrapper-lg {
+    padding: 6.5px 11px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    color: #ced4da;
+  }
   @media only screen and (max-width: 600px) {
     .imageContainer {
       display: none;
       flex-direction: column;
       height: 100vh;
       background-color: rgba(34, 34, 34, 0.4);
+    }
+    .ant-input-affix-wrapper-lg {
+      padding: 6.5px 11px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ced4da;
     }
     .formContainer {
       display: flex;

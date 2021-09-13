@@ -1,0 +1,31 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  margin: 0 auto;
+  ::ng-deep {
+    .header-container {
+      width: 50%;
+      margin-left: auto;
+      padding: 24px 0px;
+      // background-color: #340a0d; gold-dar : 55350f darker-brown 090202
+      .nav {
+        display: flex;
+        list-style-type: none;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0px;
+        margin-bottom: 0px;
+        .nav-link {
+          color: #adadad;
+        }
+        .active {
+          color: #e1ba59;
+        }
+      }
+    }
+    @media only screen and (max-width: 600px) {
+    }
+  }
+}

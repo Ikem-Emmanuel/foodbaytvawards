@@ -1,20 +1,8 @@
-<div nz-row>
-  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="imageContainer">
-    <div class="logoWrapper">
-      <img class="logo" src="./assets/logo.png" />
-    </div>
-    <img width="80%" src="./assets/login-auth-bg.svg" alt="" srcset="" style="margin: auto" />
-  </div>
-  <div nz-col class="formContainer" nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
-    <div class="formFieldWrap">
-      <div class="top">
-        <h1 class="">Welcome Back!</h1>
-        <p>
-          Don't have an account ?
-          <span
-            ><a class="login" routerLink="/auth/register">{{ 'Register' | translate }}</a></span
-          >
-        </p>
+<div nz-row class="login-card">
+  <div class="formFieldWrap" nz-col nzSpan="24">
+    <div>
+      <div class="login-card-header">
+        <h1 class="login-card-header-text">LOGIN</h1>
       </div>
       <div>
         <div class="loginForm">
@@ -27,14 +15,14 @@
             <nz-form-item>
               <nz-form-control nzErrorTip="Please Enter an email">
                 <nz-input-group nzSize="large" nzPrefixIcon="user">
-                  <input nz-input formControlName="mail" placeholder="username: example@example.com" />
+                  <input nz-input formControlName="mail" placeholder="Enter your email" />
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
               <nz-form-control nzErrorTip="Please Enter password">
                 <nz-input-group nzSize="large" nzPrefixIcon="lock">
-                  <input nz-input type="password" formControlName="password" placeholder="" />
+                  <input nz-input type="password" formControlName="password" placeholder="Enter your password" />
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>

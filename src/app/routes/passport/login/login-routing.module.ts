@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: UserLoginComponent,
-    data: { title: 'Login', titleI18n: 'Botoseal - Login' },
+    data: { title: 'Login', titleI18n: 'FoodBay Awards - Login' },
   },
 ];
 

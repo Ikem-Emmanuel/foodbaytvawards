@@ -1,0 +1,28 @@
+<div class="judges-wrapper">
+  <div class="judges-header-wrapper">
+    <h2 class="judges-header-text">THE <span class="judges-header-text-glow">JUDGRY</span></h2>
+    <p class="judges-sub-text">
+      Vestibulum id magna metus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras facilisis justo
+      in auctor suscipit
+    </p>
+  </div>
+  <div class="judges-content">
+    <div *ngFor="let judge of judges">
+      <nz-card style="width: 300px" [nzCover]="coverTemplate" [nzActions]="actionSocials">
+        <nz-card-meta nzTitle="{{ judge.title }}" nzDescription="{{ judge.description }}"></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img style="padding: 25px 25px 0px 25px" alt="example" src="{{ judge.avatar }}" />
+      </ng-template>
+      <ng-template #actionSocials>
+        <i nz-icon nzType="facebook" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionInstagram>
+        <i nz-icon nzType="instagram" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionLinkedIn>
+        <i nz-icon nzType="linkedin" nzTheme="outline"></i>
+      </ng-template>
+    </div>
+  </div>
+</div>

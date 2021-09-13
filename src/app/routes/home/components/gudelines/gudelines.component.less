@@ -1,0 +1,57 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  margin: 0 auto;
+  ::ng-deep {
+    .guidelines-wrapper {
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      margin: 48px 0px;
+      .guidelines-header-wrapper {
+        width: 40%;
+        text-align: center;
+        margin: auto;
+        .guidelines-header-text {
+          font-size: 40px;
+          margin-bottom: 0px;
+        }
+        .guidelines-header-text-glow {
+          color: #e1ba59;
+        }
+        .guidelines-sub-text {
+          color: #340a0d;
+          line-height: 18px;
+          letter-spacing: 0.01em;
+        }
+      }
+      .guidelines-content-wrapper {
+        width: 100%;
+        display: flex;
+        padding: 48px 0px;
+        .guidelines-content-container {
+          width: 100%;
+          .guidelines-tabs-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: justify;
+            .guidelines-content-text {
+              padding: 0px 20px;
+              width: 70%;
+              margin-bottom: 0px;
+              color: #828282;
+            }
+            .guidelines-content-image {
+              width: 20%;
+            }
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 600px) {
+    }
+  }
+}

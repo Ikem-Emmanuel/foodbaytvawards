@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Botoseal-Admin-Frontend": {
+    "Foodbayawards-Admin-Frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -52,33 +52,20 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Botoseal-Admin-Frontend",
+            "outputPath": "dist/Foodbayawards-Admin-Frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.less"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.less"],
             "scripts": [
               "node_modules/qrious/dist/qrious.min.js",
-               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
               "src/assets/js/canvasjs.min.js"
-
-
             ],
-            "allowedCommonJsDependencies": [
-              "@antv/g2",
-              "ajv",
-              "ajv-formats",
-              "date-fns",
-              "file-saver"
-            ]
+            "allowedCommonJsDependencies": ["@antv/g2", "ajv", "ajv-formats", "date-fns", "file-saver"]
           },
           "configurations": {
             "production": {
@@ -98,8 +85,8 @@
               "budgets": [
                 {
                   "type": "initial",
-									"maximumWarning": "4mb",
-									"maximumError": "8mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -113,19 +100,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Botoseal-Admin-Frontend:build",
+            "browserTarget": "Foodbayawards-Admin-Frontend:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Botoseal-Admin-Frontend:build:production"
+              "browserTarget": "Foodbayawards-Admin-Frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Botoseal-Admin-Frontend:build"
+            "browserTarget": "Foodbayawards-Admin-Frontend:build"
           }
         },
         "test": {
@@ -135,43 +122,32 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.less"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.less"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Botoseal-Admin-Frontend:serve"
+            "devServerTarget": "Foodbayawards-Admin-Frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Botoseal-Admin-Frontend:serve:production"
+              "devServerTarget": "Foodbayawards-Admin-Frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Botoseal-Admin-Frontend"
+  "defaultProject": "Foodbayawards-Admin-Frontend"
 }
