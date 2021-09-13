@@ -28,16 +28,17 @@
         }
       }
       .judges-content {
-        width: 100%;
+        width: auto;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        padding: 48px 0px;
+        padding: 48px 0px 0px 0px;
       }
       .judges-content-card {
         width: 300px;
       }
     }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 600px) and (min-width: 320px) {
       .judges-wrapper {
         height: 100%;
         background-position: center;
@@ -62,16 +63,78 @@
             letter-spacing: 0.01em;
           }
         }
-        .judges-content {
-          width: 100%;
-          display: block;
-          justify-content: space-between;
-          padding: 28px 0px;
-        }
         .judges-content-card {
-          width: 100%;
+          width: auto;
         }
       }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (max-width: 768px) and (min-width: 601px) {
+      .judges-wrapper {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 20px 0px;
+        .judges-header-wrapper {
+          width: 100%;
+          text-align: center;
+          margin: auto;
+          .judges-header-text {
+            font-size: 28px;
+            margin-bottom: 0px;
+          }
+          .judges-header-text-glow {
+            color: #e1ba59;
+          }
+          .judges-sub-text {
+            color: #340a0d;
+            line-height: 14px;
+            letter-spacing: 0.01em;
+          }
+        }
+        .judges-content-card {
+          width: 300px;
+        }
+      }
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (max-width: 1024px) and (min-width: 769px) {
+      .judges-wrapper {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 20px 0px;
+        .judges-header-wrapper {
+          width: 100%;
+          text-align: center;
+          margin: auto;
+          .judges-header-text {
+            font-size: 28px;
+            margin-bottom: 0px;
+          }
+          .judges-header-text-glow {
+            color: #e1ba59;
+          }
+          .judges-sub-text {
+            color: #340a0d;
+            line-height: 14px;
+            letter-spacing: 0.01em;
+          }
+        }
+        .judges-content-card {
+          width: 280px;
+        }
+      }
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (max-width: 768px) and (min-width: 1025px) {
     }
   }
 }

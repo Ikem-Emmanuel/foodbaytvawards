@@ -64,7 +64,7 @@
         }
       }
     }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 600px) and (min-width: 320px) {
       .about-wrapper {
         height: 100%;
         background-position: center;
@@ -102,6 +102,139 @@
             }
             .about-image img {
               width: 100%;
+            }
+          }
+          .about-text-container {
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            .about-text-header {
+              margin-bottom: 0px;
+              color: #340a0d;
+            }
+            .about-text-divider {
+              width: 100%;
+              text-align: left;
+              border: 1px solid #e1ba59;
+              margin: 16px 0px;
+            }
+            .about-text {
+              text-align: justify;
+              margin-bottom: 0px;
+              color: #828282;
+            }
+          }
+        }
+      }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (max-width: 768px) and (min-width: 601px) {
+      .about-wrapper {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 20px 0px;
+        .about-header-wrapper {
+          width: 100%;
+          text-align: center;
+          margin: auto;
+          .about-header-text {
+            font-size: 28px;
+            margin-bottom: 0px;
+          }
+          .about-header-text-glow {
+            color: #e1ba59;
+          }
+          .about-sub-text {
+            color: #340a0d;
+            line-height: 14px;
+            letter-spacing: 0.01em;
+          }
+        }
+        .about-content {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin: 20px 0px;
+          .about-img-container {
+            width: 100%;
+            .about-image {
+              display: block;
+              justify-content: start;
+              align-items: center;
+            }
+            .about-image img {
+              width: 90%;
+            }
+          }
+          .about-text-container {
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            .about-text-header {
+              margin-bottom: 0px;
+              color: #340a0d;
+            }
+            .about-text-divider {
+              width: 100%;
+              text-align: left;
+              border: 1px solid #e1ba59;
+              margin: 16px 0px;
+            }
+            .about-text {
+              text-align: justify;
+              margin-bottom: 0px;
+              color: #828282;
+            }
+          }
+        }
+      }
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (max-width: 1024px) and (min-width: 769px) {
+      .about-wrapper {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 20px 0px;
+        .about-header-wrapper {
+          width: 100%;
+          text-align: center;
+          margin: auto;
+          .about-header-text {
+            font-size: 28px;
+            margin-bottom: 0px;
+          }
+          .about-header-text-glow {
+            color: #e1ba59;
+          }
+          .about-sub-text {
+            color: #340a0d;
+            line-height: 14px;
+            letter-spacing: 0.01em;
+          }
+        }
+        .about-content {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 20px 0px;
+          .about-img-container {
+            width: 100%;
+            .about-image {
+              display: block;
+              justify-content: start;
+              align-items: center;
+            }
+            .about-image img {
+              width: 90%;
             }
           }
           .about-text-container {

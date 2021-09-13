@@ -1,7 +1,7 @@
 @import '~@delon/theme/index';
 :host {
   display: block;
-  margin: 0 auto;
+  margin: 0;
   ::ng-deep {
     .header-container {
       width: 50%;
@@ -26,11 +26,13 @@
       }
     }
     @media only screen and (max-width: 600px) {
-      margin: 0;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0 auto;
       .header-container {
         width: 100%;
         padding: 0px;
-        height: 250px;
         margin-left: auto;
         .toggle-nav {
           display: none;
@@ -39,47 +41,47 @@
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
+          height: 30%;
           align-items: flex-start;
           list-style-type: none;
           font-size: 16px;
           font-weight: 500;
+          padding: 0px;
           margin-bottom: 0px;
           /* width: 50%; */
           margin-left: auto;
-          padding: 20px 40px;
+          padding: 20px;
           height: 100%;
           box-shadow: 0px 1px 1px rgb(0 0 0 / 15%);
           border-radius: 3px;
           background: rgba(52, 10, 13, 0.3);
-        }
-        .menu ul {
-          display: inline-block;
-        }
+          .menu ul {
+            display: inline-block;
+          }
 
-        .menu li {
-          margin: 0px 50px 0px 0px;
-          float: left;
-          list-style: none;
-          font-size: 17px;
-        }
+          .menu li {
+            margin: 0px 50px 0px 0px;
+            float: left;
+            list-style: none;
+            font-size: 17px;
+          }
 
-        .menu li:last-child {
-          margin-right: 0px;
-        }
-        .menu a {
-          text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
-          color: #777;
-          transition: color linear 0.15s;
-        }
+          .menu li:last-child {
+            margin-right: 0px;
+          }
+          .menu a {
+            text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+            color: #777;
+            transition: color linear 0.15s;
+          }
 
-        .menu a:hover,
-        .menu .active a {
-          text-decoration: none;
-          color: #e1ba59;
+          .menu a:hover,
+          .menu .active a {
+            text-decoration: none;
+            color: #e1ba59;
+          }
         }
       }
-
-      // menu
     }
   }
 }

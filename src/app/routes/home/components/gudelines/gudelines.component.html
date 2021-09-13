@@ -8,7 +8,9 @@
       <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.title"
         ><div class="guidelines-tabs-container">
           <p style="" [innerHTML]="tab.description"></p>
-          <img class="guidelines-content-image" src="{{ tab.image }}" alt="" /></div
+          <div class="image-ul">
+            <img class="guidelines-content-image" src="{{ tab.image }}" alt="" />
+          </div></div
       ></nz-tab>
     </nz-tabset>
   </div>
