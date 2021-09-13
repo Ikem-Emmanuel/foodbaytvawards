@@ -8,7 +8,7 @@
       margin-left: auto;
       padding: 24px 0px;
       // background-color: #340a0d; gold-dar : 55350f darker-brown 090202
-      .nav {
+      .menu {
         display: flex;
         list-style-type: none;
         justify-content: space-evenly;
@@ -26,6 +26,60 @@
       }
     }
     @media only screen and (max-width: 600px) {
+      margin: 0;
+      .header-container {
+        width: 100%;
+        padding: 0px;
+        height: 250px;
+        margin-left: auto;
+        .toggle-nav {
+          display: none;
+        }
+        .menu {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: flex-start;
+          list-style-type: none;
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 0px;
+          /* width: 50%; */
+          margin-left: auto;
+          padding: 20px 40px;
+          height: 100%;
+          box-shadow: 0px 1px 1px rgb(0 0 0 / 15%);
+          border-radius: 3px;
+          background: rgba(52, 10, 13, 0.3);
+        }
+        .menu ul {
+          display: inline-block;
+        }
+
+        .menu li {
+          margin: 0px 50px 0px 0px;
+          float: left;
+          list-style: none;
+          font-size: 17px;
+        }
+
+        .menu li:last-child {
+          margin-right: 0px;
+        }
+        .menu a {
+          text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+          color: #777;
+          transition: color linear 0.15s;
+        }
+
+        .menu a:hover,
+        .menu .active a {
+          text-decoration: none;
+          color: #e1ba59;
+        }
+      }
+
+      // menu
     }
   }
 }

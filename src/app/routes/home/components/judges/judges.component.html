@@ -8,7 +8,7 @@
   </div>
   <div class="judges-content">
     <div *ngFor="let judge of judges">
-      <nz-card style="width: 300px" [nzCover]="coverTemplate" [nzActions]="actionSocials">
+      <nz-card class="judges-content-card" [nzCover]="coverTemplate" [nzActions]="actionSocials">
         <nz-card-meta nzTitle="{{ judge.title }}" nzDescription="{{ judge.description }}"></nz-card-meta>
       </nz-card>
       <ng-template #coverTemplate>
