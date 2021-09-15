@@ -21,37 +21,20 @@ export const RestApiRoutes = {
     update: 'admin/roles', //GET
   },
 
-  lotCollection: {
-    items: 'lot/item',
-    lots: 'lot',
-    export: 'lot/export/',
-    printed: 'lot/mark-as-printed/',
-    delete: 'lot/',
+  nomination: {
+    applicaiton: 'form/nomination?_allow_anonymous=true', //GET
+    confirmation: 'Confirm-nomination/find/?_allow_anonymous=true',
+    list: '',
+    shortlist: 'shortListBusiness',
+  },
+  awards: {
+    list: 'listofawards?_allow_anonymous=true',
+    create: 'award/category',
   },
 
-  batchColloection: {
-    batch: 'batch',
-    deleteEdit: 'batch/',
-    addPromo: 'batch/add-promo/',
-    promotion: 'batch/add-promo',
-  },
-
-  productCollection: {
-    product: 'product',
-    updateEdit: 'product/',
-  },
-  promoCollection: {
-    promoCreate: 'promo-type',
-    promoShow: 'promo-type/',
-  },
   password: {
     initiateReset: "password/create?_allow_anonymous=true'", //POST
     confirmReset: "password/reset?_allow_anonymous=true'", //POST
     findToken: 'password/find/', //GET
-  },
-  notification: {
-    alert: {
-      list: 'alerts', //POST
-    },
   },
 };

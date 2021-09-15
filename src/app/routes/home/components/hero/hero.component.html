@@ -41,8 +41,8 @@
     <nz-row>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Name</nz-form-label>
-          <nz-form-control [nzSpan]="16" nzErrorTip="Please input passenger's name or delete this field.">
+          <nz-form-control nzErrorTip="Please input passenger's name or delete this field.">
+            <nz-form-label>Name</nz-form-label>
             <input
               nz-input
               [(ngModel)]="q.name"
@@ -61,8 +61,8 @@
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Email</nz-form-label>
-          <nz-form-control [nzSpan]="16">
+          <nz-form-control>
+            <nz-form-label>Email</nz-form-label>
             <input
               type="email"
               nz-input
@@ -84,8 +84,8 @@
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Location</nz-form-label>
-          <nz-form-control [nzSpan]="16">
+          <nz-form-control>
+            <nz-form-label>Location</nz-form-label>
             <nz-select
               nz-tooltip
               nzTooltipPlacement="bottom"
@@ -111,8 +111,8 @@
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Business Name</nz-form-label>
-          <nz-form-control [nzSpan]="16">
+          <nz-form-control>
+            <nz-form-label>Business Name</nz-form-label>
             <input
               nz-input
               [(ngModel)]="q.business_name"
@@ -131,8 +131,8 @@
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Business Email</nz-form-label>
-          <nz-form-control [nzSpan]="16">
+          <nz-form-control>
+            <nz-form-label>Business Email</nz-form-label>
             <input
               nz-input
               [(ngModel)]="q.business_email"
@@ -151,22 +151,21 @@
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="8">Award Nomination</nz-form-label>
-          <nz-form-control [nzSpan]="16">
+          <nz-form-control>
+            <nz-form-label>Award Nomination</nz-form-label>
             <nz-select
               nz-tooltip
               nzTooltipPlacement="bottom"
               [nzTooltipTitle]="'Select an award'"
               [nzTooltipColor]="'#340a0d'"
               [(ngModel)]="q.award_Category"
-              (ngModelChange)="checkValidation($event)"
               name="status"
               id="status"
               [nzPlaceHolder]="'Select an award category'"
               [nzShowSearch]="true"
             >
               <nz-option [nzLabel]="'Select an award'" [nzValue]="'All'"></nz-option>
-              <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.value" [nzValue]="i.key"></nz-option>
+              <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.category" [nzValue]="i.id"></nz-option>
             </nz-select>
             <div *ngIf="q.award_Category == ''">
               <div *ngFor="let sta of errorTable">
@@ -181,6 +180,31 @@
 
   <ng-template #modalFooter>
     <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-    <button nz-button nzType="primary" (click)="nomiateBusiness()" [nzLoading]="isConfirmLoading">Nominate</button>
+    <button nz-button nzType="primary" (click)="nomiateBusiness()" [nzLoading]="loading">Nominate</button>
+  </ng-template>
+</nz-modal>
+
+<!-- SUCCESSFUL MODAL -->
+<nz-modal
+  class="nominationModal"
+  (nzOnCancel)="handleCancel()"
+  [(nzVisible)]="isSuccessful"
+  [nzContent]="modalsuccessContent"
+  [nzFooter]="null"
+>
+  <!-- <ng-template #modalTitle
+    ><h2 style="color: #55350f; font-size: 16px; text-align: center; font-weight: bold; margin-bottom: 0px">
+      Nominate your business of choice
+    </h2></ng-template
+  > -->
+
+  <ng-template #modalsuccessContent>
+    <nz-row style="padding: 10px 0px; display: flex; flex-direction: column; justify-content: center">
+      <img style="margin: auto" width="80%" src="./assets/actionIcons/success.gif" alt="" />
+      <p style="margin: auto; font-size: 16px; text-align: center; color: #55350f; font-weight: 600">{{ successMsg }}</p>
+      <small style="margin: auto; color: red"><em>Note: </em> Kindly check your mail to confirm your Nomination</small>
+
+      <!-- <h3>{{ successMsg }}</h3> -->
+    </nz-row>
   </ng-template>
 </nz-modal>

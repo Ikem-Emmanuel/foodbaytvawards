@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateFormatService, NotificationService } from '@core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { IndexService } from 'src/app/core/services/awards/index.service';
 import { NominationService } from 'src/app/core/services/nomination/nomination.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class HeroComponent implements OnInit {
   errorStatus = false;
   errorResult: {} = {};
   errorTable: any[] = [];
-  awardCategories = [{ key: 'Best Resturant', value: 'BestR' }];
+  awardCategories = [];
+  successMsg = '';
+  isSuccessful = false;
 
   q: {
     name: string;
@@ -34,15 +37,67 @@ export class HeroComponent implements OnInit {
   };
 
   location = [
-    { key: 'lagos', value: 'Lagos' },
-    { key: 'oyo', value: 'Oyo' },
+    { key: 'abia', value: 'Abia - Umuahia' },
+    { key: 'adamawa', value: 'Adamawa - Yola' },
+    { key: 'akwa ibom', value: 'Akwa Ibom - Uyo' },
+    { key: 'Anambra', value: 'Anambra - Awka' },
+    { key: 'bauchi', value: 'Bauchi - Bauchi' },
+    { key: 'bayelsa', value: 'Bayelsa - Yenagoa' },
+    { key: 'benue', value: 'Benue - Makurdi' },
+    { key: 'borno', value: 'Borno -Borno' },
+    { key: 'cross river', value: 'Cross River - Calabar' },
+    { key: 'delta', value: 'Delta - Asaba' },
+    { key: 'ebonyi', value: 'Ebonyi - Abakaliki' },
+    { key: 'edo', value: 'Edo - Benin City' },
+    { key: 'ekiti', value: 'Ekiti - Ado Ekiti	' },
+    { key: 'enugu', value: 'Enugu - Enugu' },
+    { key: 'gombe', value: 'Gombe - Gombe' },
+    { key: 'imo', value: 'Imo - Owerri' },
+    { key: 'jigawa', value: 'Jigawa - Dutse' },
+    { key: 'kaduna', value: 'Kaduna - Kaduna' },
+    { key: 'kano', value: 'Kano - Kano' },
+    { key: 'kastina', value: 'Kastina - Kastina' },
+    { key: 'kebbi', value: 'Kebbi - Birnin Kebbi' },
+    { key: 'kogi', value: 'Kogi - Lokoja' },
+    { key: 'kwara', value: 'Kwara - Ilorin' },
+    { key: 'lagos', value: 'Lagos - Ikeja' },
+    { key: 'nasarawa', value: 'Nasarawa - Lafia' },
+    { key: 'niger', value: 'Niger - Mina' },
+    { key: 'ogun', value: 'Ogun - Abeokuta' },
+    { key: 'ondo', value: 'Ondo - Akure' },
+    { key: 'osun', value: 'Osun Oshogbo' },
+    { key: 'oyo', value: 'Oyo Ibadan' },
+    { key: 'plateau', value: 'Plateau - Jos' },
+    { key: 'rivers', value: 'River - Port Harcourt' },
+    { key: 'sokoto', value: 'Sokoto - Sokoto' },
+    { key: 'taraba', value: 'Taraba - Jalingo' },
+    { key: 'yobe', value: 'Yobe - Damaturu' },
+    { key: 'zamfara', value: 'Zamfara - Gusau' },
   ];
   constructor(
     private dateFormat: DateFormatService,
-    private nominationService: NominationService,
     private modalSrv: NzModalService,
     private notify: NotificationService,
+    private awardService: IndexService,
+    private nominationService: NominationService,
   ) {}
+
+  //GET AWARDS CATEGORIES
+
+  loadawardCategories() {
+    this.awardService
+      .list()
+      .then((res: any) => {
+        this.awardCategories = res.data;
+        this.loading = false;
+      })
+      .catch((err: any) => {
+        console.warn('error: ', err);
+        this.loading = false;
+      });
+  }
+
+  // MODAL ACTIONS
 
   nominationModal(): void {
     this.isVisible = true;
@@ -50,14 +105,26 @@ export class HeroComponent implements OnInit {
 
   modalClose(): void {
     this.isVisible = false;
+    this.isSuccessful = true;
+    setTimeout(() => {
+      this.isSuccessful = false;
+    }, 2000);
+    this.q = {
+      name: '',
+      email: '',
+      location: '',
+      business_name: '',
+      business_email: '',
+      award_Category: '',
+    };
+    this.errorTable = [];
+    return;
   }
 
   handleCancel(): void {
     this.isVisible = false;
     this.errorTable = [];
   }
-
-  fields(): void {}
 
   checkValidation(value: any) {
     // console.log(value);
@@ -68,6 +135,7 @@ export class HeroComponent implements OnInit {
   }
 
   formValidation() {
+    console.log('You will fine');
     if ((this.errorTable = [])) {
       let dataSet = [
         { key: 'name', value: this.q.name },
@@ -98,38 +166,38 @@ export class HeroComponent implements OnInit {
 
   nomiateBusiness() {
     this.formValidation();
-    console.log('here');
-    // console.log(validationError);
-    // let ErrorData = errorMsg.values();
-    // let validationError = '';
-    // for (let error of ErrorData) {
-    //   validationError = error;
-    // }
-    // console.log(validationError);
-    // if (!this.q.name || !this.q.email || !this.q.location || !this.q.business_name || !this.q.business_email || !this.q.award_Category) {
-    //   this.notify.error('', 'Input All Fields');
-    //   return;
-    // }
-    // this.loading = true;
-    // console.log(this.q);
-    // this.nominationService
-    //   .nominate(this.q)
-    //   .then((res) => {
-    //     if (res.error) {
-    //       this.notify.error('', res.error);
-    //       this.loading = false;
-    //       return;
-    //     }
-    //     this.notify.success('', res.message);
-    //     this.loading = false;
-    //     this.modalClose();
-    //   })
-    //   .catch((err) => {
-    //     this.loading = false;
-    //     this.notify.error('', err);
-    //     console.log(err);
-    //   });
+    this.loading = true;
+    let body = {
+      nominees_name: this.q.name,
+      email: this.q.email,
+      nominees_location: this.q.location,
+      business_name: this.q.business_name,
+      business_email: this.q.business_email,
+      award_confirmation_date: new Date().toISOString().substring(0, 10),
+      award_id: this.q.award_Category,
+    };
+    this.nominationService
+      .nominate(body)
+      .then((res) => {
+        if (res.error) {
+          this.notify.error('', res.error);
+          this.loading = false;
+          return;
+        }
+        // this.notify.success('', res.message);
+        this.successMsg = res.message;
+
+        this.loading = false;
+        this.modalClose();
+      })
+      .catch((err) => {
+        this.loading = false;
+        this.notify.error('', err);
+        console.log(err);
+      });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadawardCategories();
+  }
 }

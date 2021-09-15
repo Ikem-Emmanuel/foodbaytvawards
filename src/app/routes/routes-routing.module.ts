@@ -21,10 +21,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: 'exception', loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule) },
-      {
-        path: 'inventory',
-        loadChildren: () => import('./inventory/inventory.module').then((m) => m.InventoryModule),
-      },
+
       {
         path: 'account',
         loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),

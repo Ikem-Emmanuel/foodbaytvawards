@@ -62,12 +62,15 @@ export class DefaultInterceptor implements HttpInterceptor {
       return;
     }
 
-    const errortext = (ev.error?.message ? ev.error?.message : null) || CODEMESSAGE[ev.status] || (ev.statusText == "Unknown Error" ? 'Failed to establish connection to Server !' : ev.statusText );
+    const errortext =
+      (ev.error?.message ? ev.error?.message : null) ||
+      CODEMESSAGE[ev.status] ||
+      (ev.statusText == 'Unknown Error' ? 'Failed to establish connection to Server !' : ev.statusText);
     this.notification.error(`Request Error:`, errortext);
   }
 
   /**
-   *  Token 
+   *  Token
    */
   private refreshTokenRequest(): Observable<any> {
     const model = this.tokenSrv.get();
@@ -77,12 +80,12 @@ export class DefaultInterceptor implements HttpInterceptor {
   // #region Refresh Token一： 401  Token
 
   private tryRefreshToken(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    // 1、Token 
+    // 1、Token
     if ([`/api/auth/refresh`].some((url) => req.url.includes(url))) {
       this.toLogin();
       return throwError(ev);
     }
-    // 2 `refreshToking`  `true`  Token 
+    // 2 `refreshToking`  `true`  Token
     if (this.refreshToking) {
       return this.refreshToken$.pipe(
         filter((v) => !!v),
@@ -96,12 +99,12 @@ export class DefaultInterceptor implements HttpInterceptor {
 
     return this.refreshTokenRequest().pipe(
       switchMap((res) => {
-        // 
+        //
         this.refreshToking = false;
         this.refreshToken$.next(res);
         //  token
         this.tokenSrv.set(res);
-        // 
+        //
         return next.handle(this.reAttachToken(req));
       }),
       catchError((err) => {
@@ -154,7 +157,7 @@ export class DefaultInterceptor implements HttpInterceptor {
   // #endregion
 
   private toLogin(): void {
-   // this.notification.error(`Please login to access this resource。`, ``);
+    // this.notification.error(`Please login to access this resource。`, ``);
     this.goTo('/auth/login');
   }
 
@@ -165,7 +168,6 @@ export class DefaultInterceptor implements HttpInterceptor {
     this.checkStatus(ev);
     switch (ev.status) {
       case 200:
-        
         break;
       case 401:
         if (this.refreshTokenType === 're-request') {
@@ -196,20 +198,17 @@ export class DefaultInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // 
-    if (!req.headers.has("Content-Type")) {
+    //
+    if (!req.headers.has('Content-Type')) {
       req = req.clone({
-       // headers: req.headers.set("Content-Type", "application/json"),
+        // headers: req.headers.set("Content-Type", "application/json"),
       });
     }
-    if (!req.headers.has("Authorization")) {
+    if (!req.headers.has('Authorization')) {
       const token = this.tokenSrv.get()?.token;
       if (token) {
         req = req.clone({
-          headers: req.headers.set(
-            "Authorization",
-            `Bearer ${token}`
-          ),
+          headers: req.headers.set('Authorization', `Bearer ${token}`),
         });
       }
     }
