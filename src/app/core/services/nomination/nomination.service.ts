@@ -19,10 +19,16 @@ export class NominationService {
   list() {
     return this.http.get(environment.SERVER_URL + RestApiRoutes.nomination.list).toPromise();
   }
+  confirm(id: any) {
+    return this.http.get(environment.SERVER_URL + RestApiRoutes.nomination.confirmation + id + '?_allow_anonymous=true').toPromise();
+  }
   info(id: any) {
     return this.http.get(environment.SERVER_URL + RestApiRoutes.nomination.list + id).toPromise();
   }
   shortList(body: any) {
     return this.http.post(environment.SERVER_URL + RestApiRoutes.nomination.shortlist, body).toPromise();
+  }
+  findToken(id: string) {
+    return this.http.get(environment.SERVER_URL + RestApiRoutes.nomination.findToken + id + '?_allow_anonymous=true').toPromise();
   }
 }

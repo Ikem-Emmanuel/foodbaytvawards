@@ -4,6 +4,9 @@
   margin: 0 auto;
 
   ::ng-deep {
+    .input-file-name {
+      margin-bottom: 0px !important;
+    }
     .hero-wrapper {
       background: url('../../../../../assets/herobg.png');
       height: 100vh;
@@ -18,7 +21,7 @@
         z-index: 1;
         .hero-content-wrapper {
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
           align-items: center;
           margin: 70px;
           height: 70%;
@@ -43,6 +46,9 @@
           }
         }
       }
+    }
+    .file-input {
+      display: none !important;
     }
 
     @media only screen and (max-width: 600px) and (min-width: 320px) {

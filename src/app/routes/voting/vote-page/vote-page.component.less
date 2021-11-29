@@ -1,0 +1,220 @@
+@import '~@delon/theme/index';
+:host {
+  display: block;
+  margin: 0 auto;
+
+  ::ng-deep {
+    .loadmore {
+      text-align: center;
+      margin-top: 12px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .page-wrapper {
+      height: 100vh;
+      overflow: scroll;
+      background: url('../../../../assets/mainbg.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      .page-container {
+        padding: 50px 70px;
+        .award-drpDown {
+          margin-bottom: 40px;
+        }
+      }
+    }
+    .input-file-name {
+      margin-bottom: 0px !important;
+    }
+    .vote-wrapper {
+      background: url('../../../../assets/herobg.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      .vote-container {
+        padding: 30px;
+        background-color: rgba(0, 0, 0, 0.75);
+        position: relative;
+        z-index: 1;
+        .vote-content-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .vote-content-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            .vote-header-text {
+              margin-bottom: 0px;
+              font-size: 48px;
+              color: #d9d9d9;
+              .vote-header-text-glow {
+                color: #e1ba59;
+              }
+            }
+            .vote-sub-text {
+              color: #d9d9d9;
+              line-height: 18px;
+              letter-spacing: 0.01em;
+            }
+          }
+        }
+      }
+      .vote-content {
+        padding: 48px 0px 0px 0px;
+      }
+      .vote-content-card {
+        width: 300px;
+      }
+    }
+    .file-input {
+      display: none !important;
+    }
+
+    @media only screen and (max-width: 600px) and (min-width: 320px) {
+      .page-wrapper {
+        height: 100%;
+        overflow: hidden;
+        background: url('../../../../assets/mainbg.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .page-container {
+          padding: 50px 30px;
+        }
+      }
+      .vote-wrapper {
+        background: url('../../../../assets/herobg.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .vote-container {
+          padding: 50px 10px;
+          background-color: rgba(0, 0, 0, 0.75);
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          .vote-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .vote-content-container {
+              display: flex;
+              flex-direction: column;
+              width: 90%;
+              align-items: center;
+              text-align: center;
+              .vote-header-text {
+                font-size: 28px;
+                color: #d9d9d9;
+
+                .vote-header-text-glow {
+                  color: #e1ba59;
+                }
+              }
+              .vote-sub-text {
+                color: #d9d9d9;
+                line-height: 18px;
+                letter-spacing: 0.01em;
+                text-align: justify;
+              }
+              .vote-action-btn {
+                display: flex;
+                margin-top: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 768px) and (min-width: 601px) {
+      .vote-wrapper {
+        background: url('../../../../assets/herobg.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .vote-container {
+          padding: 50px;
+          background-color: rgba(0, 0, 0, 0.75);
+          position: relative;
+          z-index: 1;
+          .vote-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            .vote-content-container {
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              width: 90%;
+              .vote-header-text {
+                font-size: 32px;
+                color: #d9d9d9;
+                text-align: justify;
+                .vote-header-text-glow {
+                  color: #e1ba59;
+                }
+              }
+              .vote-sub-text {
+                color: #d9d9d9;
+                padding: 12px 0px;
+                letter-spacing: 0.01em;
+                text-align: justify;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 1024px) and (min-width: 769px) {
+      .vote-wrapper {
+        background: url('../../../../assets/herobg.png');
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .vote-container {
+          padding: 50px;
+          background-color: rgba(0, 0, 0, 0.75);
+          position: relative;
+          z-index: 1;
+          .vote-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            .vote-content-container {
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              width: 80%;
+              .vote-header-text {
+                font-size: 40px;
+                color: #d9d9d9;
+                .vote-header-text-glow {
+                  color: #e1ba59;
+                }
+              }
+              .vote-sub-text {
+                color: #d9d9d9;
+                padding: 15px 0px;
+                letter-spacing: 0.01em;
+                text-align: justify;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

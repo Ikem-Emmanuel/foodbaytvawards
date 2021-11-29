@@ -1,0 +1,84 @@
+<div class="alain-default__content-title" style="margin-top: -26px">
+  <h1>
+    Users
+    <small>Create, edit and Delete a User</small>
+  </h1>
+</div>
+
+<nz-card [nzBordered]="false">
+  <div class="text-left">
+    <button nz-button (click)="addAward()" [nzType]="'primary'">
+      <i nz-icon nzType="plus"></i>
+      <span>Add</span>
+    </button>
+    <!-- <button nz-button (click)="editUser()" [nzType]="'secondary'">
+      <i nz-icon nzType="edit"></i>
+      <span>Edit</span>
+    </button> -->
+    <ng-template #iconTpl>
+      <i nz-icon nzType="question-circle-o" style="color: red"></i>
+    </ng-template>
+  </div>
+</nz-card>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="handleModalCancel()">
+  <ng-template #modalTitle>
+    <h2 style="color: #55350f; font-size: 16px; font-weight: bold; margin-bottom: 0px">Add an Award</h2>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="awardForm" (ngSubmit)="createAward()" role="form">
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Enter an award name ">
+            <nz-form-label nzFor="name"> Award Name</nz-form-label>
+            <input nz-input formControlName="category" name="category" placeholder="Enter award category name" id="category" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="24" style="margin: 25px 0px">
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="default" (click)="handleModalCancel()">Cancel</button>
+            <button nz-button nzType="primary" type="submit" [nzLoading]="loading">Add</button>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </form>
+  </ng-template>
+</nz-modal>
+<div class="container">
+  <nz-table
+    #awardTable
+    [nzLoading]="loading"
+    [nzLoadingDelay]="'1000'"
+    [nzBordered]="true"
+    [nzShowPagination]="true"
+    [nzPageSize]="15"
+    [nzData]="awards"
+  >
+    <thead>
+      <tr>
+        <th
+          nzWidth="5%"
+          [nzSelections]="userSelection"
+          [(nzChecked)]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
+        <th nzWidth="20%">Award Name</th>
+        <th nzWidth="20%">Award Nominations Counts</th>
+        <th nzWidth="20%">Business nominated</th>
+        <th nzWidth="20%">Created Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of awardTable.data">
+        <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+        <td>{{ data.category }}</td>
+        <td>{{ data.nomination_count }}</td>
+        <td>{{ data.number_of_business }}</td>
+        <td>{{ data.created_at | date: 'medium' }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

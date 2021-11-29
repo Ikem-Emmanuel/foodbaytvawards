@@ -12,8 +12,8 @@ export class UserComponent implements OnInit {
   users: any[] = [];
   roles: any[] = [];
   activationStatus: any[] = [
-    {name: 'Activate', value: true},
-    {name: 'Deactivate', value: false}
+    { name: 'Activate', value: true },
+    { name: 'Deactivate', value: false },
   ];
   q: {
     name: string;
@@ -58,7 +58,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-    this.loadRoles();
+    // this.loadRoles();
   }
 
   //TABLE DEFAULT FUNCTIONS
@@ -141,17 +141,17 @@ export class UserComponent implements OnInit {
       });
   }
 
-   loadRoles() {
-     this.userService
-       .roles()
-       .then((res) => {
-         this.roles = res.data;
-         console.log(this.roles)
-       })
-       .catch((err) => {
-         console.log(err);
-       });
-  }
+  //  loadRoles() {
+  //    this.userService
+  //      .roles()
+  //      .then((res) => {
+  //        this.roles = res.data;
+  //        console.log(this.roles)
+  //      })
+  //      .catch((err) => {
+  //        console.log(err);
+  //      });
+  // }
 
   addUser(): void {
     this.isVisible = true;
@@ -177,7 +177,7 @@ export class UserComponent implements OnInit {
           mobile: '',
           role: '',
           role_id: '',
-          status: 1
+          status: 1,
         };
         this.loading = false;
       })
@@ -188,7 +188,6 @@ export class UserComponent implements OnInit {
   }
 
   editUser(): void {
-
     let arr = Array.from(this.setOfCheckedId);
     if (arr.length > 1) {
       this.notify.info('', 'You can only select one user to edit');
@@ -204,7 +203,7 @@ export class UserComponent implements OnInit {
       .then((res) => {
         this.q = res.data.users;
         /* this.q.role = res.data.users; */
-        console.log(this.q)
+        console.log(this.q);
         this.isAddorEdit = true;
         this.isVisible = true;
         this.loading = false;

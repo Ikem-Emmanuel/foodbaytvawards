@@ -1,0 +1,131 @@
+<div class="page-wrapper">
+  <div class="vote-wrapper">
+    <div class="vote-container">
+      <div class="vote-content-wrapper">
+        <div class="vote-content-container">
+          <div>
+            <h2 class="vote-header-text">Vote <span class="vote-header-text-glow">your business of Choice</span></h2>
+            <p class="vote-sub-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vestibulum est sed lobortis placerat. Donec quis pulvinar urna.
+              Ut efficitur congue tempus. Cras finibus nec sem non finibus. Praesent sed eros dapibus, pulvinar sem vitae, vestibulum dolor.
+              Donec porttitor sapien vel quam pellentesque ultricies non eu urna. Etiam cursus cursus ornare.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-container">
+    <div class="award-drpDown">
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please select your Country ">
+            <nz-form-label>Select an award category</nz-form-label>
+            <nz-select
+              nz-tooltip
+              nzTooltipPlacement="bottom"
+              [nzTooltipTitle]="'Select an award category'"
+              [nzTooltipColor]="'#340a0d'"
+              [ngModel]="awardName"
+              (ngModelChange)="filter($event)"
+              name="awardCategorry"
+              id="nomineeLocation"
+              [nzPlaceHolder]="'Select an award category'"
+              [nzShowSearch]="true"
+            >
+              <nz-option [nzLabel]="'All Category'" [nzValue]="'All'"></nz-option>
+              <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.category" [nzValue]="i.id"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </div>
+    <div class="vote-content">
+      <nz-list nzGrid>
+        <div *ngIf="!emptyResult" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+          <div nz-col [nzXXl]="6" [nzXl]="6" [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXs]="24" *ngFor="let data of candidates">
+            <nz-list-item>
+              <nz-card nzHoverable style="width: 300px" [nzCover]="coverTemplate" style="margin: auto">
+                <div>
+                  <nz-card-meta nzTitle="{{ data.business_name }}" nzDescription="{{ data.category }}"></nz-card-meta>
+                  <div>
+                    <button
+                      nz-button
+                      (click)="voteBizmodal(data.business_name, data.category, data.nominated_business_id)"
+                      [nzType]="'primary'"
+                      [nzLoading]="loading"
+                    >
+                      Vote Business
+                    </button>
+                  </div>
+                </div>
+              </nz-card>
+              <ng-template #coverTemplate>
+                <img alt="example" width="30%" src="./../../../../assets/aboutimg.png" />
+              </ng-template>
+            </nz-list-item>
+          </div>
+        </div>
+        <div *ngIf="emptyResult">
+          <p>No Results Found</p>
+        </div>
+        <div class="loadmore" nz-list-load-more>
+          <ng-container>
+            <div class="text-right">
+              <nz-pagination
+                [nzPageIndex]="current_page"
+                [nzTotal]="total"
+                [nzItemRender]="renderItemTemplate"
+                [nzShowTotal]="rangeTemplate"
+              ></nz-pagination>
+              <ng-template #renderItemTemplate let-type let-page="page">
+                <ng-container [ngSwitch]="type">
+                  <a *ngSwitchCase="'page'" (click)="next(page)">{{ page }}</a>
+                  <!-- <a *ngSwitchCase="'prev'" *ngIf="nextPage"  (click)="next(page)">Previous</a> -->
+                  <a *ngSwitchCase="'next'" (click)="next(current_page + 1)"><strong *ngIf="nextPage">Next</strong></a>
+                  <a *ngSwitchCase="'prev_5'"> << </a>
+                  <a *ngSwitchCase="'next_5'">>></a>
+                </ng-container>
+              </ng-template>
+              <ng-template #rangeTemplate let-total> {{ from }}-{{ to }} of {{ total }} items </ng-template>
+            </div>
+          </ng-container>
+        </div>
+      </nz-list>
+    </div>
+  </div>
+</div>
+
+<!-- Email Verification -->
+<nz-modal
+  class="nominationModal"
+  [(nzVisible)]="votemodal"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="null"
+  [nzOkLoading]="loading"
+  (nzOnCancel)="modalClose()"
+>
+  <ng-template #modalTitle
+    ><h2 style="color: #55350f; font-size: 16px; text-align: center; font-weight: bold; margin-bottom: 0px">
+      Vote {{ businessName }} For {{ nominatedAward }} award
+    </h2></ng-template
+  >
+
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="votersForm" (ngSubmit)="voteBusiness()" role="form">
+      <nz-form-item style="padding-bottom: 20px">
+        <nz-form-control nzErrorTip="Please input your email ">
+          <nz-form-label>Enter Email</nz-form-label>
+          <input nz-input name="email" placeholder="Enter your email" id="votersEmail" formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-col nzSpan="24">
+          <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+          <button nz-button nzType="primary" [nzLoading]="loading">Vote Business</button>
+        </nz-col>
+      </nz-form-item>
+    </form>
+  </ng-template>
+</nz-modal>

@@ -10,6 +10,7 @@
           <p class="loginHeader" *ngIf="view === true">
             {{ 'Reset Password' }}
           </p>
+
           <form nz-form [formGroup]="form" (ngSubmit)="login()" role="form" *ngIf="view == false">
             <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" nzCloseable class="mb-lg"></nz-alert>
             <nz-form-item>

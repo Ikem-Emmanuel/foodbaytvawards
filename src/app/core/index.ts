@@ -9,4 +9,5 @@ export * from './interface/user.interface';
 export * from './config/notification.service';
 export * from './config/date.format.config';
 export * from './services/profile/profile.service';
+export * from './directives/dragDrop.directive';
 // export * from './services/notification/alerts.service';

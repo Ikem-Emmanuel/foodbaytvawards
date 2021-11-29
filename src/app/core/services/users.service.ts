@@ -33,8 +33,4 @@ export class UsersService {
   delete(id: string) {
     return this.http.delete(environment.SERVER_URL + RestApiRoutes.users.delete + id).toPromise();
   }
-
-  roles() {
-    return this.http.get(environment.SERVER_URL + RestApiRoutes.role.list).toPromise();
-  }
 }

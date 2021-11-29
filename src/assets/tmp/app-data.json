@@ -1,28 +1,89 @@
 {
   "app": {
-    "name": "Food-Bay-Awards Dashboard",
-    "description": "An Anti-Counterfeiting Solution for Products and Documents"
+    "name": "Food Bay Awards",
+    "description": "An Award Nomination and Voting System"
   },
   "menu": [
     {
       "text": "Dashboard",
       "i18n": "menu.main",
       "group": true,
-      "hideInBreadcrumb": true,
+      "hideInBreadcrumb": false,
       "children": [
         {
           "text": "Dashboard",
           "i18n": "menu.dashboard",
           "icon": "anticon-dashboard",
+          "link": "/dashboard"
+        }
+      ]
+    },
+    {
+      "text": "Operations",
+      "i18n": "menu.operations",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Operations",
+          "i18n": "menu.operations",
+          "icon": "anticon-group",
           "children": [
             {
-              "text": "Dashboard",
-              "link": "/dashboard/v1",
-              "i18n": "menu.dashboard.v1"
+              "text": "Nominations",
+              "link": "/operations/nomination",
+              "icon": "anticon-container",
+              "i18n": "menu.nomination"
+            },
+            {
+              "text": "Shotlist",
+              "link": "/operations/shortlist",
+              "icon": "anticon-hdd",
+              "i18n": "menu.shortlist"
+            },
+            {
+              "text": "Votes",
+              "link": "/operations/votelist",
+              "icon": "anticon-inbox",
+              "i18n": "menu.vote"
+            },
+            {
+              "text": "Awards",
+              "link": "/operations/award-list",
+              "icon": "anticon-notification",
+              "i18n": "menu.award"
             }
           ]
         }
       ]
     },
+    {
+      "text": "User",
+      "i18n": "menu.user.index",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "User",
+          "i18n": "menu.user.index",
+          "icon": "anticon-user",
+          "link": "/users"
+        }
+      ]
+    },
+    {
+      "text": "Account",
+      "i18n": "menu.account.index",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Profile",
+          "i18n": "menu.account.profile",
+          "icon": "anticon-user",
+          "link": "/account"
+        }
+      ]
+    }
   ]
 }

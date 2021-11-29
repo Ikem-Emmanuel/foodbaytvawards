@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "Food Bay Awards",
-    "description": "An Anti-Counterfeiting Solution for Products and Documents"
+    "description": "An Award Nomination and Voting System"
   },
   "menu": [
     {
@@ -13,7 +13,8 @@
         {
           "text": "Dashboard",
           "i18n": "menu.dashboard",
-          "icon": "anticon-dashboard"
+          "icon": "anticon-dashboard",
+          "link": "/dashboard"
         }
       ]
     },
@@ -29,28 +30,28 @@
           "icon": "anticon-group",
           "children": [
             {
-              "text": "Batch",
-              "link": "/inventory/lot",
+              "text": "Nominations",
+              "link": "/operations/nomination",
               "icon": "anticon-container",
-              "i18n": "menu.lot"
+              "i18n": "menu.nomination"
             },
             {
-              "text": "Batch",
-              "link": "/inventory/batch",
+              "text": "Shotlist",
+              "link": "/operations/shortlist",
               "icon": "anticon-hdd",
-              "i18n": "menu.batch"
+              "i18n": "menu.shortlist"
             },
             {
-              "text": "Product",
-              "link": "/inventory/product",
+              "text": "Votes",
+              "link": "/operations/votelist",
               "icon": "anticon-inbox",
-              "i18n": "menu.product"
+              "i18n": "menu.vote"
             },
             {
-              "text": "Promotion",
-              "link": "/inventory/promo",
+              "text": "Awards",
+              "link": "/operations/award-list",
               "icon": "anticon-notification",
-              "i18n": "menu.promo"
+              "i18n": "menu.award"
             }
           ]
         }

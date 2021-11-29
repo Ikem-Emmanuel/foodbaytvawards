@@ -14,7 +14,7 @@
         </div>
         <div class="hero-action-btn">
           <button nz-button nzType="primary" nzSize="large" (click)="nominationModal()">Nominate a Business</button>
-          <button nz-button nzType="default" nzSize="large">How it works</button>
+          <button nz-button nzType="default" nzSize="large" (click)="uploadvideoModal()">Upload a Video</button>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
   [(nzVisible)]="isVisible"
   [nzTitle]="modalTitle"
   [nzContent]="modalContent"
-  [nzFooter]="modalFooter"
+  [nzFooter]="null"
   [nzOkLoading]="loading"
   (nzOnCancel)="handleCancel()"
 >
@@ -38,149 +38,214 @@
   >
 
   <ng-template #modalContent>
-    <nz-row>
+    <form nz-form [formGroup]="nominationForm" (ngSubmit)="nomiateBusiness()" role="form">
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input passenger's name or delete this field.">
-            <nz-form-label>Name</nz-form-label>
-            <input
-              nz-input
-              [(ngModel)]="q.name"
-              (ngModelChange)="checkValidation($event)"
-              name="card"
-              placeholder="Enter your fullname"
-              id="card"
-            />
-            <div *ngIf="q.name == ''">
-              <div *ngFor="let sta of errorTable">
-                <small *ngIf="sta.key == 'name'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
+          <nz-form-control nzErrorTip="Please select your full name">
+            <nz-form-label>Full Name</nz-form-label>
+            <input nz-input name="nomineeName" placeholder="Enter your fullname" id="nomineeName" formControlName="nomineeName" />
           </nz-form-control>
         </nz-form-item>
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="Please input your email ">
             <nz-form-label>Email</nz-form-label>
-            <input
-              type="email"
-              nz-input
-              [(ngModel)]="q.email"
-              (ngModelChange)="checkValidation($event)"
-              name="card"
-              placeholder="Enter your email Address"
-              id="card"
-              [email]="true"
-              required
-            />
-            <div *ngFor="let sta of errorTable">
-              <div *ngIf="q.email == ''">
-                <small *ngIf="sta.key == 'name'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
+            <input nz-input name="nomineeEmail" placeholder="Enter your email" id="nomineeEmail" formControlName="nomineeEmail" />
           </nz-form-control>
         </nz-form-item>
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-control>
-            <nz-form-label>Location</nz-form-label>
+          <nz-form-control nzErrorTip="Please select your Country ">
+            <nz-form-label>Select your Country</nz-form-label>
             <nz-select
               nz-tooltip
               nzTooltipPlacement="bottom"
-              [nzTooltipTitle]="'Select an award'"
+              [nzTooltipTitle]="'Select your Country'"
               [nzTooltipColor]="'#340a0d'"
-              [(ngModel)]="q.location"
-              (ngModelChange)="checkValidation($event)"
-              name="status"
-              id="status"
-              [nzPlaceHolder]="'Select a location'"
+              formControlName="nomineeLocation"
+              name="nomineeLocation"
+              id="nomineeLocation"
+              [nzPlaceHolder]="'Select your Country'"
               [nzShowSearch]="true"
             >
-              <nz-option [nzLabel]="'Select a Location'" [nzValue]="'All'"></nz-option>
-              <nz-option *ngFor="let i of location" [nzLabel]="i.value" [nzValue]="i.key"></nz-option>
+              <nz-option [nzLabel]="'Select your country'" [nzValue]="'All'"></nz-option>
+              <nz-option *ngFor="let i of locations" [nzLabel]="i.name" [nzValue]="i.id"></nz-option>
             </nz-select>
-            <div *ngIf="q.location == ''">
-              <div *ngFor="let sta of errorTable">
-                <small *ngIf="sta.key == 'location'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
           </nz-form-control>
         </nz-form-item>
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-control>
-            <nz-form-label>Business Name</nz-form-label>
-            <input
-              nz-input
-              [(ngModel)]="q.business_name"
-              (ngModelChange)="checkValidation($event)"
-              name="card"
-              placeholder="Enter Business name"
-              id="card"
-            />
-            <div *ngIf="q.business_name == ''">
-              <div *ngFor="let sta of errorTable">
-                <small *ngIf="sta.key == 'business name'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
+          <nz-form-label nzSpan="24">Business Name</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a business name">
+            <input nz-input name="bizName" placeholder="Enter Business name" id="bizName" formControlName="bizName" />
           </nz-form-control>
         </nz-form-item>
       </nz-col>
       <nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-control>
-            <nz-form-label>Business Email</nz-form-label>
-            <input
-              nz-input
-              [(ngModel)]="q.business_email"
-              (ngModelChange)="checkValidation($event)"
-              name="card"
-              placeholder="Enter Business email"
-              id="card"
-            />
-            <div *ngIf="q.business_email == ''">
-              <div *ngFor="let sta of errorTable">
-                <small *ngIf="sta.key == 'business email'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
+          <nz-form-label nzSpan="24">Business Email</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a business email ">
+            <input nz-input name="bizEmail" placeholder="Enter a business email" id="bizEmail" formControlName="bizEmail" />
           </nz-form-control>
         </nz-form-item>
       </nz-col>
-      <nz-col nzSpan="24">
+      <nz-col nzSpan="24" style="margin-bottom: 30px">
         <nz-form-item>
-          <nz-form-control>
-            <nz-form-label>Award Nomination</nz-form-label>
+          <nz-form-label nzSpan="24">Select an Award</nz-form-label>
+          <nz-form-control nzErrorTip="Please Select an award ">
             <nz-select
               nz-tooltip
               nzTooltipPlacement="bottom"
               [nzTooltipTitle]="'Select an award'"
               [nzTooltipColor]="'#340a0d'"
-              [(ngModel)]="q.award_Category"
-              name="status"
-              id="status"
-              [nzPlaceHolder]="'Select an award category'"
+              formControlName="award"
+              name="award"
+              id="award"
+              [nzPlaceHolder]="'Select an award'"
               [nzShowSearch]="true"
             >
               <nz-option [nzLabel]="'Select an award'" [nzValue]="'All'"></nz-option>
               <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.category" [nzValue]="i.id"></nz-option>
             </nz-select>
-            <div *ngIf="q.award_Category == ''">
-              <div *ngFor="let sta of errorTable">
-                <small *ngIf="sta.key == 'award category'" style="color: red">{{ sta.value }}</small>
-              </div>
-            </div>
           </nz-form-control>
         </nz-form-item>
       </nz-col>
-    </nz-row>
+      <nz-form-item>
+        <nz-col nzSpan="24">
+          <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+          <button nz-button nzType="primary" [nzLoading]="loading">Nominate A Business</button>
+        </nz-col>
+      </nz-form-item>
+    </form>
   </ng-template>
+</nz-modal>
 
-  <ng-template #modalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-    <button nz-button nzType="primary" (click)="nomiateBusiness()" [nzLoading]="loading">Nominate</button>
+<!-- BUSINESS FORM FORM -->
+<nz-modal
+  class="nominationModal"
+  [(nzVisible)]="isActive"
+  [nzTitle]="bizmodalTitle"
+  [nzContent]="bizmodalContent"
+  [nzFooter]="null"
+  [nzOkLoading]="loading"
+  (nzOnCancel)="videoUploadModalCancel()"
+>
+  <ng-template #bizmodalTitle
+    ><h2 style="color: #55350f; font-size: 16px; text-align: center; font-weight: bold; margin-bottom: 0px">
+      Enter your Business Info
+    </h2></ng-template
+  >
+
+  <ng-template #bizmodalContent>
+    <form nz-form [formGroup]="bizForm" (ngSubmit)="bizUpload()" role="form">
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Select your Business Name</nz-form-label>
+          <nz-form-control nzErrorTip="Please select your Business Name ">
+            <nz-select
+              nz-tooltip
+              nzTooltipPlacement="bottom"
+              [nzTooltipTitle]="'Select your business'"
+              [nzTooltipColor]="'#340a0d'"
+              formControlName="business_id"
+              name="business"
+              id="business"
+              [nzPlaceHolder]="'Select your business'"
+              [nzShowSearch]="true"
+              (click)="(bizUpload)"
+              formControlName="business_id"
+            >
+              <nz-option [nzLabel]="'Select Business name'" [nzValue]="'All'"></nz-option>
+              <nz-option *ngFor="let i of businessList" [nzLabel]="i.business_name" [nzValue]="i.id"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Owners Name</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your name ">
+            <input nz-input name="name" placeholder="Enter your fullname" id="name" formControlName="name" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Owners' Email</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your email ">
+            <input nz-input name="email" placeholder="Enter your email" id="email" formControlName="email" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Location</nz-form-label>
+          <nz-form-control nzErrorTip="Please Select a Location ">
+            <nz-select
+              nz-tooltip
+              nzTooltipPlacement="bottom"
+              [nzTooltipTitle]="'Select an award'"
+              [nzTooltipColor]="'#340a0d'"
+              formControlName="video"
+              name="location"
+              id="location"
+              [nzPlaceHolder]="'Select a location'"
+              [nzShowSearch]="true"
+              formControlName="location"
+            >
+              <nz-option [nzLabel]="'Select a Location'" [nzValue]="'All'"></nz-option>
+              <nz-option *ngFor="let i of locations" [nzLabel]="i.name" [nzValue]="i.id"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Operation Video</nz-form-label>
+          <nz-form-control nzErrorTip="Please Select your Operation Video ">
+            <input
+              type="file"
+              formControlName="video"
+              style="display: none"
+              accept="video/*"
+              name="video"
+              required
+              (change)="readFile($event)"
+              #fileUpload
+            />
+            <nz-form-item class="upload-form-item">
+              <div
+                nz-button
+                nzBlock
+                (click)="fileUpload.click()"
+                style="
+                  padding: 5px;
+                  width: 100%;
+                  border: 1px solid rgba(118, 118, 118, 0.5);
+                  border-radius: 4px;
+                  text-align: center;
+                  color: rgba(118, 118, 118, 0.5);
+                  cursor: pointer;
+                "
+              >
+                <i nz-icon nzType="upload"></i>
+                Click to Upload a Video
+              </div>
+            </nz-form-item>
+            {{ fileName }}
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <div>
+        <nz-col nzSpan="24">
+          <button nz-button nzType="default" (click)="videoUploadModalCancel()">Cancel</button>
+          <button nz-button nzType="primary" type="submit" [nzLoading]="loading">Upload a Video</button>
+        </nz-col>
+      </div>
+    </form>
   </ng-template>
 </nz-modal>
 
@@ -202,7 +267,7 @@
     <nz-row style="padding: 10px 0px; display: flex; flex-direction: column; justify-content: center">
       <img style="margin: auto" width="80%" src="./assets/actionIcons/success.gif" alt="" />
       <p style="margin: auto; font-size: 16px; text-align: center; color: #55350f; font-weight: 600">{{ successMsg }}</p>
-      <small style="margin: auto; color: red"><em>Note: </em> Kindly check your mail to confirm your Nomination</small>
+      <!-- <small *ngIf="isVisible" style="margin: auto; color: red"><em>Note: </em> Kindly check your mail to confirm your Nomination</small> -->
 
       <!-- <h3>{{ successMsg }}</h3> -->
     </nz-row>

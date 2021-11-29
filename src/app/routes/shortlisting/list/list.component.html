@@ -1,0 +1,202 @@
+<div class="alain-default__content-title" style="margin-top: -26px">
+  <h1>
+    Shortlisting Information
+    <small>View, filter and approve a shortlisted user</small>
+  </h1>
+</div>
+
+<div class="container">
+  <nz-card [nzBordered]="false">
+    <form nz-form (ngSubmit)="filter()" class="search__form">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 24, xl: 48, xxl: 48 }">
+        <div nz-col nzMd="4" nzSm="24">
+          <nz-form-item style="margin-bottom: 0px">
+            <nz-form-control>
+              <nz-select [(ngModel)]="q.award_id" name="deviceCategory" [nzPlaceHolder]="'Select an award category '" id="deviceCategory">
+                <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.category" [nzValue]="i.id"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzMd="8" nzSm="24">
+          <nz-form-item style="margin-bottom: 0px">
+            <nz-form-label nzFor="updatedAt"> Date Range </nz-form-label>
+            <nz-form-control style="margin-bottom: 0px">
+              <nz-range-picker
+                [nzRanges]="ranges"
+                [(ngModel)]="q.range"
+                name="range"
+                id="updatedAt"
+                (ngModelChange)="onChange($event)"
+              ></nz-range-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="6">
+          <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">Filter</button>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+
+  <nz-table
+    #shortlistTable
+    [nzData]="shortlistedTable"
+    [nzLoading]="loading"
+    [nzShowPagination]="false"
+    [nzBordered]="true"
+    [nzPageSize]="15"
+    nzTableLayout="auto"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="2%">
+          <a
+            ><i
+              style="font-size: 20px"
+              nz-icon
+              nz-tooltip
+              nzTooltipPlacement="top"
+              [nzTooltipTitle]="'Click plus icon to view Business Activities'"
+              nzType="container"
+              nzTheme="outline"
+            ></i
+          ></a>
+        </th>
+        <th
+          [nzSelections]="businessSelection"
+          [(nzChecked)]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+          nzWidth="5%"
+        ></th>
+        <th>Business Info</th>
+        <th>Owners Info</th>
+        <th>Shortlisted Awards Category</th>
+        <!-- <th>Number of Awards</th> -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of shortlistTable.data">
+        <tr class="expanded-cell-table">
+          <td
+            [nzExpand]="expandSet.has(data.nominated_business.id)"
+            (nzExpandChange)="onExpandChange(data.nominated_business.id, $event)"
+          ></td>
+          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+          <td>
+            <div>
+              <b>Name: </b>{{ data?.nominated_business.business_name }}<br />
+              <b>Email: </b>{{ data?.nominated_business.email }}<br />
+              <b>Address: </b
+              >{{ data?.nominated_business.business_location == null ? 'No Data Found' : data.nominated_business.business_location }}
+            </div>
+            <div *ngIf="data == null">
+              {{ 'NO MATCH FOUND' }}
+            </div>
+          </td>
+          <td>
+            <div>
+              <b>Name: </b>{{ data?.nominated_business.owners_name == null ? 'No Data Found' : data.nominated_business.owners_name }}<br />
+              <b>Email: </b
+              >{{
+                data?.nominated_business.owners_email == null || data?.nominated_business.owners_email == ''
+                  ? 'No Data Found'
+                  : data.nominated_business.owners_email
+              }}<br />
+              <b>Address: </b
+              >{{ data?.nominated_business.owners_location == null ? 'No Data Found' : data.nominated_business.owners_location }}
+            </div>
+            <div *ngIf="data == null">
+              {{ 'NO MATCH FOUND' }}
+            </div>
+          </td>
+          <td>
+            <div>
+              {{ data?.nominated_business.no_of_awards_nominated }}
+            </div>
+            <div *ngIf="data == null">
+              {{ 'NO MATCH FOUND' }}
+            </div>
+          </td>
+          <!-- <td>{{ data.created_at | date: 'medium' }}</td> -->
+          <td>
+            <button
+              nz-button
+              [nzType]="'primary'"
+              [disabled]="data?.shorlisted == '2'"
+              (click)="viewVideo(data?.email, data.nominated_business.business_name, data.video_path)"
+            >
+              <i nz-icon nzType="play-square" nzTheme="outline"></i>
+              <span>Play Business Video</span>
+            </button>
+          </td>
+        </tr>
+        <tr [nzExpand]="expandSet.has(data.nominated_business.id)" class="expanded-cell-table">
+          <h3 class="table-history">Award Details</h3>
+          <br />
+          <nz-table #innertable [nzData]="bizAwards" [nzPageSize]="10" [nzLoading]="loading" [nzShowPagination]="true" [nzBordered]="true">
+            <thead>
+              <tr>
+                <th>Award Category</th>
+                <th>Times Nominated</th>
+                <th>Confirmation Status</th>
+                <th>Nomination Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of innertable.data">
+                <td>{{ data.award.category }}</td>
+                <td>{{ data.times_nominated }}</td>
+                <td>
+                  <i nz-icon nzType="check-square" nzTheme="outline" *ngIf="data.is_award_confirmed == 1"></i>
+                  <i nz-icon nzType="border" nzTheme="outline" *ngIf="data.is_award_confirmed == 0"></i>
+                </td>
+                <td>{{ data.created_at | date: 'short' }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>
+
+<div>
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="handleModalCancel()"
+  >
+    <ng-template #modalTitle>{{ businessInfo.name }} Operation Video</ng-template>
+
+    <ng-template #modalContent>
+      <div style="margin: auto" *ngIf="videoAvailable">
+        <vg-player>
+          <video #media width="100%" [vgMedia]="media" id="singleVideo" preload="auto" controls>
+            <source src="{{ businessInfo.videoPath }}" type="video/mp4" />
+            <source src="{{ businessInfo.videoPath }}" type="video/ogg" />
+            <source src="{{ businessInfo.videoPath }}" type="video/webm" />
+          </video>
+        </vg-player>
+        <div style="padding: 10px 0px">
+          <button nz-button nzDanger (click)="approvalStatus('Declined')" [nzLoading]="isConfirmLoading">Disqualify Business</button>
+          <button nz-button nzType="primary" (click)="approvalStatus('Approved')" [nzLoading]="isConfirmLoading">
+            Approve Business For Voting
+          </button>
+        </div>
+      </div>
+      <div style="margin: auto" *ngIf="!videoAvailable">
+        <nz-row style="padding: 10px 0px; display: flex; flex-direction: column; justify-content: center">
+          <img style="margin: auto" width="80%" src="./assets/gif/error-upload.gif" alt="" />
+          <h1 style="text-align: center; padding: 20px; font-size: 16px; color: #d90606">
+            {{ businessInfo.name }} is yet to upload a vidoe
+          </h1>
+        </nz-row>
+      </div>
+    </ng-template>
+  </nz-modal>
+</div>

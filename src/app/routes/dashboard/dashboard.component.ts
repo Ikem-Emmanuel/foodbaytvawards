@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     // this.onDateChangeChart(this.qChart.range);
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
   ngAfterViewInit(): void {

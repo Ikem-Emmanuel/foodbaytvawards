@@ -1,0 +1,153 @@
+<div class="alain-default__content-title" style="margin-top: -26px">
+  <h1>
+    Voting Information
+    <small>View, filter voted Business</small>
+  </h1>
+</div>
+
+<div class="container">
+  <nz-card [nzBordered]="false">
+    <form nz-form (ngSubmit)="filter()" class="search__form">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 24, xl: 48, xxl: 48 }">
+        <div nz-col nzMd="4" nzSm="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-select [(ngModel)]="q.award_id" name="deviceCategory" [nzPlaceHolder]="'Select an award category '" id="deviceCategory">
+                <nz-option *ngFor="let i of awardCategories" [nzLabel]="i.category" [nzValue]="i.id"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzMd="8" nzSm="24">
+          <nz-form-item>
+            <nz-form-label nzFor="updatedAt"> Date Range </nz-form-label>
+            <nz-form-control>
+              <nz-range-picker
+                [nzRanges]="ranges"
+                [(ngModel)]="q.range"
+                name="range"
+                id="updatedAt"
+                (ngModelChange)="onChange($event)"
+              ></nz-range-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="6">
+          <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">Filter</button>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+
+  <nz-table
+    #shortlistTable
+    [nzData]="shortlistedTable"
+    [nzLoading]="loading"
+    [nzShowPagination]="false"
+    [nzBordered]="true"
+    [nzPageSize]="15"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="2%">
+          <a
+            ><i
+              style="font-size: 20px"
+              nz-icon
+              nz-tooltip
+              nzTooltipPlacement="top"
+              [nzTooltipTitle]="'Click plus icon to view Business Activities'"
+              nzType="container"
+              nzTheme="outline"
+            ></i
+          ></a>
+        </th>
+        <th
+          [nzSelections]="businessSelection"
+          [(nzChecked)]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+          nzWidth="5%"
+        ></th>
+        <th nzWidth="20%">Business Info</th>
+        <th nzWidth="20%">Owners Info</th>
+        <th nzWidth="15%">Shortlisted Awards Category</th>
+        <th nzWidth="15%">Total Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of shortlistTable.data">
+        <ng-container *ngIf="data?.shortlisted == '2'">
+          <tr class="expanded-cell-table">
+            <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+            <td>
+              <div>
+                <b>Name: </b>{{ data?.business_name }}<br />
+                <b>Email: </b>{{ data?.email }}<br />
+                <b>Address: </b>{{ data?.business_location }}
+              </div>
+              <div *ngIf="data == null">
+                {{ 'NO MATCH FOUND' }}
+              </div>
+            </td>
+            <td>
+              <div>
+                <b>Name: </b>{{ data?.business_name }}<br />
+                <b>Email: </b>{{ data?.email }}<br />
+                <b>Address: </b>{{ data?.business_location }}
+              </div>
+              <div *ngIf="data == null">
+                {{ 'NO MATCH FOUND' }}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{ data?.no_of_awards_nominated }}
+              </div>
+              <div *ngIf="data == null">
+                {{ 'NO MATCH FOUND' }}
+              </div>
+            </td>
+            <td>{{ data.created_at | date: 'medium' }}</td>
+          </tr>
+          <tr [nzExpand]="expandSet.has(data.id)" class="expanded-cell-table">
+            <h3 class="table-history">Award Details</h3>
+            <br />
+            <nz-table
+              #innertable
+              [nzData]="bizAwards"
+              [nzPageSize]="10"
+              [nzLoading]="loading"
+              [nzShowPagination]="true"
+              [nzBordered]="true"
+            >
+              <thead>
+                <tr>
+                  <th>Award Category</th>
+                  <th>Times Nominated</th>
+                  <th>Vote Counts</th>
+                  <th>Confirmation Status</th>
+                  <th>Nomination Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of innertable.data">
+                  <td>{{ data.award.category }}</td>
+                  <td>{{ data.times_nominated }}</td>
+                  <td>{{ data.vote_count }}</td>
+                  <td>
+                    <i nz-icon nzType="check-square" nzTheme="outline" *ngIf="data.is_award_confirmed == 1"></i>
+                    <i nz-icon nzType="border" nzTheme="outline" *ngIf="data.is_award_confirmed == 0"></i>
+                  </td>
+
+                  <td>{{ data.created_at | date: 'short' }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

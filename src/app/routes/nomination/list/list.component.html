@@ -1,0 +1,114 @@
+<div class="alain-default__content-title" style="margin-top: -26px">
+  <h1>
+    Nominations Information
+    <small>View, filter and shortlist a nominated user</small>
+  </h1>
+</div>
+
+<div class="container">
+  <nz-card [nzBordered]="false">
+    <div class="card text-left">
+      <button nz-button [nzType]="'primary'">
+        <i nz-icon nzType="plus"></i>
+        <span>Shortlist a Businesses</span>
+      </button>
+      <ng-template #iconTpl>
+        <i nz-icon nzType="question-circle-o" style="color: red"></i>
+      </ng-template>
+    </div>
+  </nz-card>
+
+  <nz-table
+    #businessTable
+    [nzData]="nominatedBusiness"
+    [nzPageSize]="10"
+    [nzLoading]="loading"
+    [nzShowPagination]="true"
+    [nzBordered]="true"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="2%">
+          <a
+            ><i
+              style="font-size: 20px"
+              nz-icon
+              nz-tooltip
+              nzTooltipPlacement="top"
+              [nzTooltipTitle]="'Click plus icon to view Business Activities'"
+              nzType="container"
+              nzTheme="outline"
+            ></i
+          ></a>
+        </th>
+        <th
+          [nzSelections]="businessSelection"
+          [(nzChecked)]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+          nzWidth="5%"
+        ></th>
+        <th nzWidth="25%">Business Info</th>
+        <th nzWidth="20%">Number of Awards Nominated</th>
+        <th nzWidth="15%">Number of Nomination</th>
+        <th nzWidth="20%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of businessTable.data">
+        <tr class="expanded-cell-table">
+          <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+          <td>
+            <div *ngIf="data">
+              <b>Name:</b> {{ data?.business_name }}<br />
+              <b>Email:</b> {{ data?.email }}
+            </div>
+            <div *ngIf="data == null">
+              {{ 'NO MATCH FOUND' }}
+            </div>
+          </td>
+          <td>{{ data?.no_of_awards_nominated }}</td>
+          <td>{{ data?.nomination_count }}</td>
+          <td>
+            <div class="card text-left">
+              <button nz-button [nzType]="'primary'" [disabled]="data?.shorlisted == 1" (click)="shortlistBusiness(data.email)">
+                <i nz-icon nzType="plus"></i>
+                <span>Shortlist a Business</span>
+              </button>
+              <ng-template #iconTpl>
+                <i nz-icon nzType="question-circle-o" style="color: red"></i>
+              </ng-template>
+            </div>
+          </td>
+        </tr>
+        <tr [nzExpand]="expandSet.has(data.id)" class="expanded-cell-table">
+          <h3 class="table-history">Award Details</h3>
+          <br />
+          <nz-table #innertable [nzData]="bizAwards" [nzPageSize]="10" [nzLoading]="loading" [nzShowPagination]="true" [nzBordered]="true">
+            <thead>
+              <tr>
+                <th>Award Category</th>
+                <th>Times Nominated</th>
+                <th>Confirmation Status</th>
+                <th>Nomination Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of innertable.data">
+                <td>{{ data.award.category }}</td>
+                <td>{{ data.times_nominated }}</td>
+                <td>
+                  <i nz-icon nzType="check-square" nzTheme="outline" *ngIf="data.is_award_confirmed == 1"></i>
+                  <i nz-icon nzType="border" nzTheme="outline" *ngIf="data.is_award_confirmed == 0"></i>
+                </td>
+
+                <td>{{ data.created_at | date: 'short' }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

@@ -134,8 +134,8 @@ export class UserLoginComponent implements OnDestroy {
     this.loginService
       .login(body)
       .then((res) => {
-        if (res.status === 'FAILED') {
-          this.error = res.message;
+        if (res.status === 'Failed') {
+          this.notify.error('', res.message);
           this.loading = false;
           return;
         }
@@ -146,9 +146,9 @@ export class UserLoginComponent implements OnDestroy {
         this.startupSrv.load().then((): any => {
           let url = this.tokenService.referrer!.url || '/';
           this.startupSrv.load().then(() => {
-            let url = this.tokenService.referrer!.url || '/';
+            let url = this.tokenService.referrer!.url || '/dashboard';
             if (url.includes('/auth')) {
-              url = '/';
+              url = '/dashboard';
             }
             this.router.navigateByUrl(url);
           });

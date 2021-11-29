@@ -59,7 +59,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less"],
+            "styles": ["src/styles.less", "./node_modules/@videogular/ngx-videogular/fonts/videogular.css"],
             "scripts": [
               "node_modules/qrious/dist/qrious.min.js",
               "node_modules/jquery/dist/jquery.min.js",
@@ -149,5 +149,6 @@
       }
     }
   },
+
   "defaultProject": "Foodbayawards-Admin-Frontend"
 }

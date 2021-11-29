@@ -61,6 +61,7 @@ import {
   FacebookOutline,
   InstagramOutline,
   LinkedinOutline,
+  PlaySquareOutline,
 } from '@ant-design/icons-angular/icons';
 
 export const ICONS_AUTO = [
@@ -121,4 +122,5 @@ export const ICONS_AUTO = [
   FacebookOutline,
   InstagramOutline,
   LinkedinOutline,
+  PlaySquareOutline,
 ];
